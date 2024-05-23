@@ -5,6 +5,7 @@ import com.aliatic.core.trm.domain.dto.ParametrosRequestDTO;
 import com.aliatic.core.trm.domain.dto.StandardResponseDTO;
 import com.aliatic.core.trm.persistence.entities.ParametrosEntity;
 import com.aliatic.core.trm.services.ParametrosService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static com.aliatic.core.trm.config.Textos.Es.*;
 import static com.aliatic.core.trm.config.Constants.*;
@@ -28,6 +30,7 @@ public class ParametrosController {
         this.parametrosService = parametrosService;
     }
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<StandardResponseDTO> getParametros(
             @RequestParam(name = "q", required = false, defaultValue = VACIO) String q,
@@ -81,6 +84,43 @@ public class ParametrosController {
         }
 
         return ResponseEntity.ok(respuestaEstandar);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StandardResponseDTO> getParametroById(@PathVariable Long id) {
+        StandardResponseDTO respuestaEstandar = new StandardResponseDTO();
+        respuestaEstandar.setFechaHora(new Date());
+        try {
+            Optional<ParametrosEntity> parametro = parametrosService.findById(id);
+            if (parametro.isEmpty()) {
+                respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.NOT_FOUND.value());
+                respuestaEstandar.setMensaje(HttpStatus.NO_CONTENT.getReasonPhrase());
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuestaEstandar);
+            }
+            respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.OK.value());
+            respuestaEstandar.setMensaje(HttpStatus.OK.getReasonPhrase());
+            respuestaEstandar.setPayload(parametro.get());
+            return ResponseEntity.ok(respuestaEstandar);
+        } catch (Exception ex) {
+            respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            respuestaEstandar.setMensaje(SE_HA_PRODUCIDO_UN_ERROR_INTERNO_LISTARAMS.getVal());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaEstandar);
+        }
+    }
+
+    @PutMapping("/{idParametro}")
+    public ResponseEntity<StandardResponseDTO> updateParametro(@PathVariable Long idParametro, @RequestBody ParametrosRequestDTO parametros) {
+        try {
+            ParametrosEntity parametrosEntity = parametrosService.convertirReqADTO(parametros);
+            StandardResponseDTO respuestaEstandar = parametrosService.updateParametro(idParametro, parametrosEntity);
+            return ResponseEntity.ok(respuestaEstandar);
+        } catch (Exception ex) {
+            StandardResponseDTO respuestaEstandar = new StandardResponseDTO();
+            respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            respuestaEstandar.setMensaje("Se ha producido un error interno");
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaEstandar);
+        }
     }
 
 }

@@ -1,13 +1,6 @@
 package com.aliatic.core.trm.persistence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +18,13 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name="TRM_FUENTES")
+@Table(name="TRM_FUENTES",     indexes = {
+        @Index(columnList = "FKTPTASA"),
+        @Index(columnList = "FKMONPRO"),
+        @Index(columnList = "FKMONDES"),
+        @Index(columnList = "FKMETEXT"),
+        @Index(columnList = "FKPROVIN")
+})
 public class FuentesEntity extends BaseEntity{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +65,10 @@ public class FuentesEntity extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "FKMETEXT")
 	private MetodosExtracionEntity metodoExtracion;
+
+    @ManyToOne
+    @JoinColumn(name = "FKPROVIN")
+    private ProveedoresEntity proveedoresInfo;
 	
 	
     @Size(max = 255)

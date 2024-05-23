@@ -28,7 +28,10 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name="TRM_PARAMETROS", indexes = @Index(columnList = "CDPARAME"))
+@Table(name="TRM_PARAMETROS",     indexes = {
+        @Index(columnList = "CDPARAME"),
+        @Index(columnList = "CDCOMPON")
+})
 public class ParametrosEntity extends BaseEntity {
 
     @Id

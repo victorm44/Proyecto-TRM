@@ -60,4 +60,8 @@ public class MensajeEntranteWebScrapingDTO {
 	
 	@JsonProperty("tipo_tasa_int")
 	private int tipoTasaInt;
+
+	@JsonProperty("proveedor_informacion")
+	private  int proveedorInformacion;
 }
+

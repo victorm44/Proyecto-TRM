@@ -3,22 +3,14 @@ package com.aliatic.core.trm.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.aliatic.core.trm.persistence.entities.*;
+import com.aliatic.core.trm.persistence.repositories.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.aliatic.core.trm.config.AliaticLogger;
 import com.aliatic.core.trm.domain.dto.MensajeEntranteWebScrapingDTO;
-import com.aliatic.core.trm.persistence.entities.FuentesEntity;
-import com.aliatic.core.trm.persistence.entities.MetodosExtracionEntity;
-import com.aliatic.core.trm.persistence.entities.MonedasEntity;
-import com.aliatic.core.trm.persistence.entities.TiposCambioEntity;
-import com.aliatic.core.trm.persistence.entities.TiposTasasEntity;
-import com.aliatic.core.trm.persistence.repositories.FuentesRepository;
-import com.aliatic.core.trm.persistence.repositories.MetodosExtraccionRepository;
-import com.aliatic.core.trm.persistence.repositories.MonedasRepository;
-import com.aliatic.core.trm.persistence.repositories.TiposCambioRepository;
-import com.aliatic.core.trm.persistence.repositories.TiposTasasRepository;
 import com.aliatic.core.trm.services.AlmacenarTRMService;
 import jakarta.transaction.Transactional;
 
@@ -38,17 +30,19 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 	private final MonedasRepository monedasRepository;
 	private final MetodosExtraccionRepository metodosExtraccionRepository;
 	private final TiposTasasRepository tiposTasasRepository;
+	private final ProveedoresRepository proveedoresRepository;
 	private final String nombreClase;
 
 	public AlmacenarTRMServiceImpl(TiposCambioRepository tiposCambioRepository, FuentesRepository fuentesRepository,
-			MonedasRepository monedasRepository, MetodosExtraccionRepository metodosExtraccionRepository,
-			TiposTasasRepository tiposTasasRepository) {
+                                   MonedasRepository monedasRepository, MetodosExtraccionRepository metodosExtraccionRepository,
+                                   TiposTasasRepository tiposTasasRepository, ProveedoresRepository proveedoresRepository) {
 		this.tiposCambioRepository = tiposCambioRepository;
 		this.fuentesRepository = fuentesRepository;
 		this.monedasRepository = monedasRepository;
 		this.metodosExtraccionRepository = metodosExtraccionRepository;
 		this.tiposTasasRepository = tiposTasasRepository;
-		this.nombreClase = this.getClass().getName();
+        this.proveedoresRepository = proveedoresRepository;
+        this.nombreClase = this.getClass().getName();
 
 	}
 
@@ -56,7 +50,7 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 	public List<TiposCambioEntity> convertirAInterno(List<MensajeEntranteWebScrapingDTO> mensajeEntrante) {
 
 		String nombreMetodo = Thread.currentThread().getStackTrace()[1].getMethodName();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 		AliaticLogger.info(INICIO_TRANSFORMACION_COLA_RABBIT.getVal(), nombreClase, nombreMetodo);
 		List<TiposCambioEntity> listaSalida = new ArrayList<>();
 
@@ -69,8 +63,8 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 				// Datos administrativos
 				cambio.setFechaCreacion(new Date());
 				cambio.setFechaModificacion(new Date());
-				cambio.setUsuarioCreacion(auth.getPrincipal().toString());
-				cambio.setUsuarioModificacion(auth.getPrincipal().toString());
+				cambio.setUsuarioCreacion(ALIATIC_BACKGROUND);
+				cambio.setUsuarioModificacion(ALIATIC_BACKGROUND);
 
 				// Datos de TRM
 				cambio.setAnioSemanaVigencia(Integer.parseInt(mensaje.getSemana()));
@@ -112,7 +106,9 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 					return;
 				}
 
-				Optional<TiposTasasEntity> tiposTasas = tiposTasasRepository.findById((long) mensaje.getTipoTasaInt());
+
+				Optional<TiposTasasEntity> tiposTasas = tiposTasasRepository
+						.findById((long) mensaje.getTipoTasaInt());
 
 				if (tiposTasas.isEmpty()) {
 					AliaticLogger.error(NO_SE_ENCONTRARON_TIPOS_TASAS.getVal(), nombreClase, nombreMetodo,
@@ -120,9 +116,18 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 					return;
 				}
 
+				Optional<ProveedoresEntity> proveedores = proveedoresRepository
+						.findById((long) mensaje.getProveedorInformacion());
+
+				if (proveedores.isEmpty()){
+					AliaticLogger.error(NO_SE_ENCONTRO_PROVEEDOR.getVal(), nombreClase, nombreMetodo,
+							String.valueOf(mensaje.getProveedorInformacion()));
+					return;
+				}
+
 				List<FuentesEntity> fuente = fuentesRepository
-						.findBymonedaProcedenciaAndMonedaDestinoAndMetodoExtracionAndTipoTasa(procedencia.get(0),
-								destino.get(0), metodoExtracion.get(), tiposTasas.get());
+						.findBymonedaProcedenciaAndMonedaDestinoAndMetodoExtracionAndTipoTasaAndProveedoresInfo(procedencia.get(0),
+								destino.get(0), metodoExtracion.get(), tiposTasas.get(), proveedores.get());
 
 				if (fuente.isEmpty()) {
 					AliaticLogger.error(NO_SE_ENCONTRO_FUENTE.getVal(), nombreClase, nombreMetodo, null);

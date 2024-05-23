@@ -2,6 +2,8 @@ package com.aliatic.core.trm.services.impl;
 
 import com.aliatic.core.trm.domain.dto.ParametrosRequestDTO;
 import com.aliatic.core.trm.domain.dto.StandardResponseDTO;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+
 
 import com.aliatic.core.trm.persistence.entities.ParametrosEntity;
 import com.aliatic.core.trm.persistence.repositories.ParametrosRepository;
@@ -33,7 +37,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 	@Override
 	public ParametrosEntity save(ParametrosEntity parametroEntity) {
 		return parametroRepository.save(parametroEntity);
-		
+
 	}
 
 	@Override
@@ -58,6 +62,41 @@ public class ParametrosServiceImpl implements ParametrosService {
 
         return parametrosEntity;
 	}
+
+	@Override
+	public Optional<ParametrosEntity> findById(Long id) {
+		return parametroRepository.findById(id);
+	}
+
+	@Override
+	public StandardResponseDTO updateParametro(Long idParametro, ParametrosEntity parametrosEntity) {
+		return parametroRepository.findById(idParametro).map(parametroExistente -> {
+			// Actualizar los datos del parametroExistente con los de parametrosEntity
+			parametroExistente.setParametro(parametrosEntity.getParametro());
+			parametroExistente.setSistemaOComponente(parametrosEntity.getSistemaOComponente());
+			parametroExistente.setTexto1(parametrosEntity.getTexto1());
+			parametroExistente.setTexto2(parametrosEntity.getTexto2());
+			parametroExistente.setFecha1(parametrosEntity.getFecha1());
+			parametroExistente.setFecha2(parametrosEntity.getFecha2());
+			parametroExistente.setNumero1(parametrosEntity.getNumero1());
+			parametroExistente.setNumero2(parametrosEntity.getNumero2());
+			parametroExistente.setEstado(parametrosEntity.getEstado());
+
+			parametroRepository.save(parametroExistente);
+
+			StandardResponseDTO response = new StandardResponseDTO();
+			response.setCodigoRespuestaInterno(HttpStatus.OK.value());
+			response.setMensaje("Parametro actualizado con éxito");
+			response.setPayload(parametroExistente);
+			return response;
+		}).orElseGet(() -> {
+			StandardResponseDTO response = new StandardResponseDTO();
+			response.setCodigoRespuestaInterno(HttpStatus.NOT_FOUND.value());
+			response.setMensaje("Parametro no encontrado");
+			return response;
+		});
+	}
+
 
 	@Override
 	public StandardResponseDTO almacenarParametro(ParametrosEntity parametrosEntity) {
@@ -97,5 +136,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 		response.setPayload(parametrosNew);
 		return response;
 	}
+
+
 
 }
