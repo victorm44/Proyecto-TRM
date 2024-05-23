@@ -22,6 +22,7 @@ public class Textos {
         NO_SE_ENCONTRO_METODO_EXTRACCION("No se encontró Método de extracción"),
         NO_SE_ENCONTRARON_TIPOS_TASAS("No se encontraron Tipos de tasas"),
         NO_SE_ENCONTRO_FUENTE("No se encontró fuente"),
+        NO_SE_ENCONTRO_PROVEEDOR("No se encontró proveedor"),
         FIN_TRANSFORMACION_COLA_RABBIT("Fin transformación de información desde cola rabbit"),
         ERROR_AL_TRANSOFRMAR_INFO_COLA_RABBIT("Hubo un error al transformar información desde cola rabbit"),
         INICIO_ALMACENAMIENTO_DESDE_COLA_RABBIT("Inicio almacenamiento información desde cola rabbit"),
@@ -33,6 +34,7 @@ public class Textos {
         SISTEMA_O_COMPONENTE_NO_VACIO("El sistema o componente no puede estar vacío"),
         PARAMETRO_REGISTRADO_PREVIAMENTE("El parámetro que intenta registrar ya se encuentra en la base de datos"),
         AUTORIZACION_CONCECIDA("Autorización concedida");
+
 
         private final String val;
 

@@ -14,5 +14,6 @@ public interface ParametrosService {
 	Page<ParametrosEntity> findByParametroContaining(String prametro, int numeroPagina);
 	ParametrosEntity convertirReqADTO(ParametrosRequestDTO requestDTO);
 	StandardResponseDTO almacenarParametro(ParametrosEntity parametrosEntity);
-
+	Optional<ParametrosEntity> findById(Long id);
+	StandardResponseDTO updateParametro(Long idParametro, ParametrosEntity parametrosEntity);
 }

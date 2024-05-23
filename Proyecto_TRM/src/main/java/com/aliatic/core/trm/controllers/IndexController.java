@@ -3,10 +3,12 @@ package com.aliatic.core.trm.controllers;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.aliatic.core.trm.config.AliaticLogger;
 import static com.aliatic.core.trm.config.Textos.Es.*;
+
 
 @RestController
 public class IndexController {
@@ -14,6 +16,7 @@ public class IndexController {
 	@Value("${trm.app.version}")
 	private String versionNumber;
 
+	@CrossOrigin
 	@GetMapping("/")
 	public ResponseEntity<String> index() {
 

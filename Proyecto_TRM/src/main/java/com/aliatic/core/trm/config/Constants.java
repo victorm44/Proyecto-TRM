@@ -34,6 +34,8 @@ public class Constants {
     public static final String VACIO = "";
     public static final String PAGINA_CERO= "0";
 
+    public static final String ALIATIC_BACKGROUND = "ALIATICBACKGROUND";
+
     public static Key getSigningKeyB64(String secret) {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         return Keys.hmacShaKeyFor(keyBytes);

@@ -2,9 +2,9 @@
 <configuration>
     <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
+            <level>INFO</level>
         </filter>
-        <url>http://192.168.1.80:8088</url>
+        <url>http://saptestaliatic.ddns.net:8088</url>
         <token>d0ffe687-8f07-4d04-b227-f285172dccaa</token>
         <index>idx_trmlogs_dev</index>
         <disableCertificateValidation>true</disableCertificateValidation>
@@ -46,6 +46,7 @@
     <root level="INFO">
 		<appender-ref ref="ConsoleOutput"/>
 		<appender-ref ref="LOKI"/>
+		<appender-ref ref="SPLUNK"/>
 	</root>
 
 

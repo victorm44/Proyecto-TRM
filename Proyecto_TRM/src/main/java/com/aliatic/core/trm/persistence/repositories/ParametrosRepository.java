@@ -14,5 +14,5 @@ public interface ParametrosRepository extends JpaRepository<ParametrosEntity, Lo
 	
 	Page<ParametrosEntity> findByParametroContaining(String parametro, Pageable pageable);
 	Optional<ParametrosEntity> findByParametro(String parametro);
-
+	Optional<ParametrosEntity> findById(Long id);
 }

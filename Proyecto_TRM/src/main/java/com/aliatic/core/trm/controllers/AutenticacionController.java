@@ -6,10 +6,8 @@ import com.aliatic.core.trm.domain.dto.StandardResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.aliatic.core.trm.domain.dto.AuthRequestDTO;
 import com.aliatic.core.trm.domain.dto.AuthResponseDTO;
@@ -18,6 +16,8 @@ import static com.aliatic.core.trm.config.Textos.Es.*;
 
 import java.util.Date;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AutenticacionController {
@@ -30,6 +30,7 @@ public class AutenticacionController {
 		this.nombreClase = this.getClass().getName();
 	}
 
+	@CrossOrigin
 	@PostMapping
 	public ResponseEntity<StandardResponseDTO> login(@RequestBody  AuthRequestDTO request) {
 		String nombreMetodo = Thread.currentThread().getStackTrace()[1].getMethodName();
