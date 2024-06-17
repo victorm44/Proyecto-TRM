@@ -1,0 +1,199 @@
+[33mcommit fe2304dcbd7bc8aa55079159520b79a323fb9ba1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/completar_servicio_params[m[33m, [m[1;31morigin/feature/completar_servicio_params[m[33m, [m[1;32mfeature/completar_servicio_dtf[m[33m)[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Thu May 23 14:41:06 2024 -0500
+
+    Ajuste metodo updateParametro
+
+[33mcommit b0bad58a282016bde75ac98d54dccd160cc329ee[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Thu May 23 14:33:11 2024 -0500
+
+    Creación metodo update para la entidad parametro
+
+[33mcommit b5fd0be490e6af610efc2b120279b20e82e01ee2[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Wed May 22 13:40:14 2024 -0500
+
+    Cambio de nivel ERROR por INFO en logback
+
+[33mcommit 560e6102304105b804dadc6fe2e15d7f1a437d47[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Wed May 22 13:14:32 2024 -0500
+
+    Se agregó índice a múltiples entidades y se configuraron agregados de registro de Splunk
+
+[33mcommit ad306878e1c42f13dd5ce4826df2478ae8e9782e[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Tue May 21 16:29:20 2024 -0500
+
+    Cambio nuevamente a la cola rabbitMQ que se usa en despliegue
+
+[33mcommit 9618c41d31777db3ac790b492f0361bc354b5d56[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Tue May 21 16:11:03 2024 -0500
+
+    Añadir parametro Proveedor al extraer de la cola rabbit
+
+[33mcommit a555f67054f2ca0f77115bb87bb1285eee983b02[m[33m ([m[1;31morigin/bugfix/problema_repository[m[33m)[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Tue May 21 11:42:00 2024 -0500
+
+    Error en repositorio
+
+[33mcommit 0b31ac0b6355ff6213c76b647c07ee8a54f429b6[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Thu May 16 16:38:47 2024 -0500
+
+    Habilitar CORS desde la clase principal
+
+[33mcommit 08c56e6051a1ea5415f1c6f303bfb6017f588fb7[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Wed May 15 16:56:19 2024 -0500
+
+    Cambio configuración CORS
+
+[33mcommit 95a29273984fe89c106dc4ba046fa2696d0816f4[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Wed May 15 14:06:07 2024 -0500
+
+    Habilitar CORS desde la clase WebSecurityConfig
+
+[33mcommit 24b63b40fe85d54be583aee84e3cabd45adfda1d[m
+Author: Victor Manuel Restrepo Jimenez <victor.restrepo@aliatic.com.co>
+Date:   Tue May 14 15:02:09 2024 -0500
+
+    Implementacion parametro get que permite filtrar por por el idParametro
+
+[33mcommit 3153c833763ce3b42416c20da1499e5c646423e3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 13f09e2 7a0314c
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Tue May 14 15:05:38 2024 +0000
+
+    Merged PR 126: juan.arenas_13.05.2024 -> Reparación de bug usuario creación en almacenamient...
+    
+    juan.arenas_13.05.2024 -> Reparación de bug usuario creación en almacenamiento de datos de colas rabbit
+
+[33mcommit 7a0314cd394a0a659d92c5e8fb97ab3bca27d595[m[33m ([m[1;31morigin/feature/002_juan.arenas_TRMV2[m[33m)[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon May 13 11:18:09 2024 -0500
+
+    juan.arenas_13.05.2024 -> Reparación de bug usuario creación en almacenamiento de datos de colas rabbit
+
+[33mcommit 13f09e2e1035a73b14cd7b8ffa76a38d8c5550b6[m
+Merge: 504cf34 02b7153
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon May 13 05:46:39 2024 +0000
+
+    Merged PR 124: Actualización
+
+[33mcommit 02b7153c7952cbfdedc2a449eef5dbe2d547be1d[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun May 12 23:54:53 2024 -0500
+
+    juan.arenas_12.05.2024 -> Creación de controlador de parámetros - reparación de Dockerfile
+
+[33mcommit 445afb41ff2b726c6b9eaeb1ebf9a4ae025c7eff[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun May 12 23:16:37 2024 -0500
+
+    juan.arenas_12.05.2024 -> Creación de controlador de parámetros
+
+[33mcommit 03c2f69e4a0ade6234c62b0b9362ed85ccf4228e[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sat May 11 12:44:07 2024 -0500
+
+    juan.arenas_11.05.2024 -> Adición de lógica de autenticación
+
+[33mcommit abd387fd5fa6de353030da62af14a3cbefdf1503[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Thu May 2 20:27:35 2024 -0500
+
+    juan.arenas_02.05.2024 -> Pre-implementación en laboratorio
+
+[33mcommit 86f4638299c2721bc9d8707682ed79b73f530afa[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Apr 22 22:05:33 2024 -0500
+
+    juan.arenas_22.04.2023 -> Avance en lectura de cola rabbit para la persistencia de mensajes desde web scraping
+
+[33mcommit df03446aab4d7bf2fc24c486166990e051c258de[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Thu Apr 18 20:29:04 2024 -0500
+
+    juan.arenas_18.04.2023 -> Ajuste en logger properties
+
+[33mcommit 3dfd1694941b3e1ea02ca6535de9d0df85c13a3a[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Apr 1 13:57:21 2024 -0500
+
+    juan.arenas_adicion de arcivos de configuracion
+
+[33mcommit 504cf34be4249c34339cb590d9ca1153e1a9bdde[m
+Merge: cf2e4c4 29559d6
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Mar 4 16:08:12 2024 +0000
+
+    Merged PR 78: juanarsi_04.03.2024 -> Adición de propiedades de Sonar V2
+    
+    juanarsi_04.03.2024 -> Adición de propiedades de Sonar V2
+
+[33mcommit 29559d6415a29c1d5298ec799003a70f402c0ba1[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Mar 4 11:07:42 2024 -0500
+
+    juanarsi_04.03.2024 -> Adición de propiedades de Sonar V2
+
+[33mcommit cf2e4c46ea97b45c057a6688007acf0f40be54b0[m
+Merge: d05d367 41e42f9
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Mar 4 16:03:07 2024 +0000
+
+    Merged PR 77: PR a master
+
+[33mcommit 41e42f9686c310d41d1dd477609d0f9ec33f76ed[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Mon Mar 4 11:00:53 2024 -0500
+
+    juanarsi_04.03.2024 -> Adición de propiedades de Sonar
+
+[33mcommit d70154cb687ef88dbb08397d41ae0f1667ecc9fa[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun Mar 3 22:56:03 2024 -0500
+
+    juanarsi_03.03.2024 -> Adición de logs. Falta implementar el resto de tipos de Logs en la clase controladora
+
+[33mcommit cd92732297eaaf6acc985215b2a0e2299cabb6f5[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun Mar 3 18:27:34 2024 -0500
+
+    juanarsi_03.03.2024 -> Adición de Swagger, creación de algunos modelos y estructura de paquetes. Logs al 30%
+
+[33mcommit 5aff4398cc3296926ede700802c8c0171cfc4c96[m
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun Mar 3 10:29:05 2024 -0500
+
+    juanarsi_03.03.2024 -> Carga inicial esqueleto proyecto con Springboot V3.2.3
+
+[33mcommit d05d367b3cfe152e8c38e36a211b47409149d74a[m
+Merge: 7c7f8e8 24a6f93
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun Aug 21 12:59:28 2022 +0000
+
+    Merged PR 3: juan.arenas@aliatic.com_10.08.2022 -> Carga inicial de archivos y creación de...
+    
+    juan.arenas@aliatic.com_10.08.2022 -> Carga incial de archivos y creación de repositorio
+
+[33mcommit 0691b3a320a873239b8689abca7d0590e581ff86[m[33m ([m[1;31morigin/Develop[m[33m)[m
+Merge: 7c7f8e8 24a6f93
+Author: Juan Fernando Arenas Silva <juan.arenas@aliatic.com.co>
+Date:   Sun Aug 21 12:58:44 2022 +0000
+
+    Merged PR 2: juan.arenas@aliatic.com_10.08.2022 -> Carga inicial de archivos y creación de...
+    
+    juan.arenas@aliatic.com_10.08.2022 -> Carga inicial de archivos y creación de repositorio
+
+[33mcommit 24a6f9319eb81c7b21788cf8225a26443ec694d1[m
+Author: AzureAD\JuanFernandoArenasSi <juan.arenas@aliatic.com.co>
+Date:   Fri Aug 19 13:58:48 2022 -0500
+
+    juan.arenas@aliatic.com_10.08.2022 -> 
