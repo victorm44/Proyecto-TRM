@@ -1,5 +1,6 @@
 package com.aliatic.core.trm.persistence.entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -14,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
 
 
 /**
@@ -56,10 +56,10 @@ public class ParametrosEntity extends BaseEntity {
     private String texto2;
     
     @Column(name = "FEFECHA1")
-    private Date fecha1;
+    private LocalDateTime fecha1;
     
     @Column(name = "FEFECHA2")
-    private Date fecha2;
+    private LocalDateTime  fecha2;
     
     @Column(name = "NMNUMER1")
     private Double numero1;

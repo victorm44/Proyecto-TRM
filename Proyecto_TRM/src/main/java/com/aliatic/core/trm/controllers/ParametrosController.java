@@ -117,8 +117,7 @@ public class ParametrosController {
         } catch (Exception ex) {
             StandardResponseDTO respuestaEstandar = new StandardResponseDTO();
             respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.INTERNAL_SERVER_ERROR.value());
-            respuestaEstandar.setMensaje("Se ha producido un error interno");
-
+            respuestaEstandar.setMensaje(SE_HA_PRODUCIDO_UN_ERROR_INTERNO_LISTARAMS.getVal());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaEstandar);
         }
     }

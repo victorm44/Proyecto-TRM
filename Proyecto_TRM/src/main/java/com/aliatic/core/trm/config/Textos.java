@@ -33,7 +33,10 @@ public class Textos {
         EL_CODIGO_DE_PARAMETRO_NO_VACIO("El código de parámetro no puede estar vacío"),
         SISTEMA_O_COMPONENTE_NO_VACIO("El sistema o componente no puede estar vacío"),
         PARAMETRO_REGISTRADO_PREVIAMENTE("El parámetro que intenta registrar ya se encuentra en la base de datos"),
+        PARAMETRO_NO_ENCONTRADO("Parametro no encontrado"),
+        PARAMETRO_ACTUALIZADO("Parametro actualizado con éxito"),
         AUTORIZACION_CONCECIDA("Autorización concedida");
+
 
 
         private final String val;
