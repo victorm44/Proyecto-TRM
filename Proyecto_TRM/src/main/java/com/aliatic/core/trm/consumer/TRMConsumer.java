@@ -18,7 +18,7 @@ public class TRMConsumer {
 	@Autowired
 	AlmacenarTRMService almacenarService;
 	
-	@RabbitListener(queues = RabbitMQConfig.QUEUE)
+	@RabbitListener(queues = RabbitMQConfig.QUEUE_TRM)
     public void consumeMessageFromQueue(List<MensajeEntranteWebScrapingDTO> informacion) {
 		
 		List<TiposCambioEntity> tiposCambio = almacenarService.convertirAInterno(informacion);
@@ -26,7 +26,6 @@ public class TRMConsumer {
 		if (!tiposCambio.isEmpty()) {
 			almacenarService.almacenarImportes(tiposCambio);
 		}
-		
     }
 
 }

@@ -71,7 +71,6 @@ public class ParametrosServiceImpl implements ParametrosService {
 	@Override
 	public StandardResponseDTO updateParametro(Long idParametro, ParametrosEntity parametrosEntity) {
 		return parametroRepository.findById(idParametro).map(parametroExistente -> {
-			// Actualizar los datos del parametroExistente con los de parametrosEntity
 			parametroExistente.setParametro(parametrosEntity.getParametro());
 			parametroExistente.setSistemaOComponente(parametrosEntity.getSistemaOComponente());
 			parametroExistente.setTexto1(parametrosEntity.getTexto1());
@@ -86,13 +85,13 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			StandardResponseDTO response = new StandardResponseDTO();
 			response.setCodigoRespuestaInterno(HttpStatus.OK.value());
-			response.setMensaje("Parametro actualizado con éxito");
+			response.setMensaje(PARAMETRO_ACTUALIZADO.getVal());
 			response.setPayload(parametroExistente);
 			return response;
 		}).orElseGet(() -> {
 			StandardResponseDTO response = new StandardResponseDTO();
 			response.setCodigoRespuestaInterno(HttpStatus.NOT_FOUND.value());
-			response.setMensaje("Parametro no encontrado");
+			response.setMensaje(PARAMETRO_NO_ENCONTRADO.getVal());
 			return response;
 		});
 	}

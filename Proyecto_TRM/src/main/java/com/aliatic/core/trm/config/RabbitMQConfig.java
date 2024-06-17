@@ -14,24 +14,36 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-	
-	public static final String QUEUE = "MQ_QA_TRM";
+
+    public static final String QUEUE_TRM = "MQ_QA_TRM";
+    public static final String QUEUE_DTF = "MQ_QA_DTF";
     public static final String EXCHANGE = "MQ_QA_TRM";
-    public static final String ROUTING_KEY = "MQ_QA_TRM";
+    public static final String ROUTING_KEY_TRM = "MQ_QA_TRM";
+    public static final String ROUTING_KEY_DTF = "MQ_QA_DTF";
 
     @Bean
-    Queue queue2() {
-        return new Queue(QUEUE);
+    Queue queueTRM() {
+        return new Queue(QUEUE_TRM);
     }
 
     @Bean
-    TopicExchange exchange2() {
+    Queue queueDTF() {
+        return new Queue(QUEUE_DTF);
+    }
+
+    @Bean
+    TopicExchange exchange() {
         return new TopicExchange(EXCHANGE);
     }
 
     @Bean
-    Binding binding2(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
+    Binding bindingTRM(Queue queueTRM, TopicExchange exchange) {
+        return BindingBuilder.bind(queueTRM).to(exchange).with(ROUTING_KEY_TRM);
+    }
+
+    @Bean
+    Binding bindingDTF(Queue queueDTF, TopicExchange exchange) {
+        return BindingBuilder.bind(queueDTF).to(exchange).with(ROUTING_KEY_DTF);
     }
 
     @Bean
@@ -39,12 +51,10 @@ public class RabbitMQConfig {
         return new Jackson2JsonMessageConverter();
     }
 
-    @SuppressWarnings("null")
     @Bean
     AmqpTemplate template(ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(converter());
         return rabbitTemplate;
     }
-
 }
