@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <url>http://saptestaliatic.ddns.net:8088</url>
+        <token>d0ffe687-8f07-4d04-b227-f285172dccaa</token>
+        <index>idx_trmlogs_dev</index>
+        <disableCertificateValidation>true</disableCertificateValidation>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%msg%n</Pattern>
+        </layout> 
+    </appender>
+    <appender name="ConsoleOutput"
+        class="ch.qos.logback.core.ConsoleAppender"> 
+        <layout class="ch.qos.logback.classic.PatternLayout"> 
+            <Pattern> 
+                %black(%d{ISO8601}) %highlight(%-5level) [%yellow(%t)] : %msg%n%throwable 
+            </Pattern> 
+        </layout>
+    </appender>
+    
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<http>
+			<url>https://logappender.aliatic.app/loki/api/v1/push</url>
+		</http>
+		<format>
+			<!-- (2) -->
+			<label>
+				<pattern>Aplicacion=TRMLAB-MS,Host=${HOSTNAME},severity=%level,thread=%thread</pattern>
+				<!-- (3) -->
+				<readMarkers>true</readMarkers>
+			</label>
+			<message>
+				<!-- (4) -->
+				<pattern>
+					%message
+				</pattern>
+			</message>
+		</format>
+	</appender>
+    <root level="INFO">
+		<appender-ref ref="ConsoleOutput"/>
+		<appender-ref ref="LOKI"/>
+		<appender-ref ref="SPLUNK"/>
+	</root>
+
+
+</configuration>
