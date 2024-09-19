@@ -33,6 +33,7 @@ public class Constants {
 
     public static final String VACIO = "";
     public static final String PAGINA_CERO= "0";
+    public static final float EPSILON = 0.00001f;
 
     public static final String ALIATIC_BACKGROUND = "ALIATICBACKGROUND";
 

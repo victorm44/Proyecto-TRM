@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import com.aliatic.core.trm.persistence.entities.*;
 import com.aliatic.core.trm.persistence.repositories.*;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.aliatic.core.trm.config.AliaticLogger;
@@ -70,7 +68,7 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 				cambio.setAnioSemanaVigencia(Integer.parseInt(mensaje.getSemana()));
 				cambio.setEstado(1);
 				try {
-					cambio.setFechafinVigencia(new SimpleDateFormat(FORMAT_YYYY_MM_DD).parse(mensaje.getFechaFinal()));
+					cambio.setFechaFinVigencia(new SimpleDateFormat(FORMAT_YYYY_MM_DD).parse(mensaje.getFechaFinal()));
 					cambio.setFechaInicioVigencia(new SimpleDateFormat(FORMAT_YYYY_MM_DD).parse(mensaje.getFechaInicial()));
 				} catch (ParseException e) {
 					AliaticLogger.error(HUBO_UN_ERROR_AL_TRANSORMAR_ALGUNA_FECHA.getVal(), nombreClase, nombreMetodo,
@@ -126,7 +124,7 @@ public class AlmacenarTRMServiceImpl implements AlmacenarTRMService {
 				}
 
 				List<FuentesEntity> fuente = fuentesRepository
-						.findBymonedaProcedenciaAndMonedaDestinoAndMetodoExtracionAndTipoTasaAndProveedoresInfo(procedencia.get(0),
+						.findByMonedaProcedenciaAndMonedaDestinoAndMetodoExtracionAndTipoTasaAndProveedoresInfo(procedencia.get(0),
 								destino.get(0), metodoExtracion.get(), tiposTasas.get(), proveedores.get());
 
 				if (fuente.isEmpty()) {

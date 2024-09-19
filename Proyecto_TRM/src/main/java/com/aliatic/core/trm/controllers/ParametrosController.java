@@ -30,20 +30,20 @@ public class ParametrosController {
         this.parametrosService = parametrosService;
     }
 
+
     @CrossOrigin
     @GetMapping
     public ResponseEntity<StandardResponseDTO> getParametros(
-            @RequestParam(name = "q", required = false, defaultValue = VACIO) String q,
-            @RequestParam(name = "pagina", required = false, defaultValue = PAGINA_CERO) Integer numeroPagina){
+            @RequestParam(name = "q", required = false, defaultValue = "") String q,
+            @RequestParam(name = "pagina", required = false, defaultValue = "0") Integer numeroPagina) {
 
         StandardResponseDTO respuestaEstandar = new StandardResponseDTO();
-        String nombreMetodo = Thread.currentThread().getStackTrace()[1].getMethodName();
         respuestaEstandar.setFechaHora(new Date());
 
         try {
             Page<ParametrosEntity> parametros = parametrosService.findByParametroContaining(q, numeroPagina);
 
-            if (parametros.getTotalElements() < 1){
+            if (parametros.getTotalElements() < 1) {
                 respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.NO_CONTENT.value());
                 respuestaEstandar.setMensaje(HttpStatus.NO_CONTENT.getReasonPhrase());
                 return ResponseEntity.status(HttpStatus.OK).body(respuestaEstandar);
@@ -53,17 +53,16 @@ public class ParametrosController {
             respuestaEstandar.setMensaje(HttpStatus.OK.getReasonPhrase());
             respuestaEstandar.setPayload(parametros);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             respuestaEstandar.setCodigoRespuestaInterno(HttpStatus.INTERNAL_SERVER_ERROR.value());
             respuestaEstandar.setMensaje(SE_HA_PRODUCIDO_UN_ERROR_INTERNO_LISTARAMS.getVal());
-            AliaticLogger.error(SE_HA_PRODUCIDO_UN_ERROR_INTERNO_LISTARAMS.getVal(), nombreClase,
-                    nombreMetodo, ex.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaEstandar);
         }
 
         return ResponseEntity.ok(respuestaEstandar);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<StandardResponseDTO> setParametros(@RequestBody ParametrosRequestDTO parametros){
 
@@ -86,6 +85,8 @@ public class ParametrosController {
         return ResponseEntity.ok(respuestaEstandar);
     }
 
+
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<StandardResponseDTO> getParametroById(@PathVariable Long id) {
         StandardResponseDTO respuestaEstandar = new StandardResponseDTO();
@@ -108,6 +109,7 @@ public class ParametrosController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/{idParametro}")
     public ResponseEntity<StandardResponseDTO> updateParametro(@PathVariable Long idParametro, @RequestBody ParametrosRequestDTO parametros) {
         try {
@@ -120,6 +122,10 @@ public class ParametrosController {
             respuestaEstandar.setMensaje(SE_HA_PRODUCIDO_UN_ERROR_INTERNO_LISTARAMS.getVal());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuestaEstandar);
         }
+
+
     }
+
+
 
 }

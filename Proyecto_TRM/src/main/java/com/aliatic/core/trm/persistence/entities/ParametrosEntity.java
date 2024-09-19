@@ -1,7 +1,6 @@
 package com.aliatic.core.trm.persistence.entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -17,7 +17,9 @@ public class TrmApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*");
+				registry.addMapping("/**")
+						.allowedOrigins("http://localhost:3000", "http://localhost:8081", "http://localhost:3000/es/settings/rate-settings")
+						.allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*");
 			}
 		};
 	}
