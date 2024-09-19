@@ -41,15 +41,15 @@ public class ParametrosServiceImpl implements ParametrosService {
 	}
 
 	@Override
-	public Page<ParametrosEntity> findByParametroContaining(String prametro, int numeroPagina) {
+	public Page<ParametrosEntity> findByParametroContaining(String parametro, int numeroPagina) {
 		final Pageable pageable = PageRequest.of(numeroPagina, MAX_REGS_POR_PAGINA);
-		return parametroRepository.findByParametroContaining(prametro, pageable);
+        return parametroRepository
+				.findByParametroContainingAndEstado(parametro, 1, pageable);
 	}
 
 	@Override
 	public ParametrosEntity convertirReqADTO(ParametrosRequestDTO requestDTO) {
 		ParametrosEntity parametrosEntity = new ParametrosEntity();
-
 		parametrosEntity.setParametro(requestDTO.getCodigoParametro());
 		parametrosEntity.setSistemaOComponente(requestDTO.getSistemaOComponente());
 		parametrosEntity.setTexto1(requestDTO.getTexto1());
@@ -71,8 +71,9 @@ public class ParametrosServiceImpl implements ParametrosService {
 	@Override
 	public StandardResponseDTO updateParametro(Long idParametro, ParametrosEntity parametrosEntity) {
 		return parametroRepository.findById(idParametro).map(parametroExistente -> {
-			parametroExistente.setParametro(parametrosEntity.getParametro());
-			parametroExistente.setSistemaOComponente(parametrosEntity.getSistemaOComponente());
+			// No actualizar 'parametro' y 'sistemaOComponente'
+			// parametroExistente.setParametro(parametrosEntity.getParametro());
+			// parametroExistente.setSistemaOComponente(parametrosEntity.getSistemaOComponente());
 			parametroExistente.setTexto1(parametrosEntity.getTexto1());
 			parametroExistente.setTexto2(parametrosEntity.getTexto2());
 			parametroExistente.setFecha1(parametrosEntity.getFecha1());
@@ -115,7 +116,6 @@ public class ParametrosServiceImpl implements ParametrosService {
 			return response;
 		}
 
-		//Consultar si el parámetro ya existía previamente
 		Optional<ParametrosEntity> validacion = parametroRepository.findByParametro(parametrosEntity.getParametro());
 		if(validacion.isPresent() && parametrosEntity.getSistemaOComponente().equals(validacion.get().getSistemaOComponente())){
 				response.setCodigoRespuestaInterno(530);

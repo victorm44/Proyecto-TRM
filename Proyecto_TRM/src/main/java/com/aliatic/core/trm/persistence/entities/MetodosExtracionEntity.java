@@ -40,7 +40,5 @@ public class MetodosExtracionEntity extends BaseEntity {
     @Size(max = 100)
     @Column(length = 100, name = "DSMETEXT")
 	private String denominacionMetodoExtracion;
-	
-	
 
 }

@@ -42,7 +42,7 @@ public class TiposCambioEntity extends BaseEntity {
 	
 	
     @Column(name = "FEFINVIG")
-	private Date fechafinVigencia;
+	private Date fechaFinVigencia;
 	
 	
 	@Column(name = "NMANSEVI")

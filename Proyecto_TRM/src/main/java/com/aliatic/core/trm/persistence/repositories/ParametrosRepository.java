@@ -12,7 +12,9 @@ import com.aliatic.core.trm.persistence.entities.ParametrosEntity;
 @Repository
 public interface ParametrosRepository extends JpaRepository<ParametrosEntity, Long>{
 	
-	Page<ParametrosEntity> findByParametroContaining(String parametro, Pageable pageable);
 	Optional<ParametrosEntity> findByParametro(String parametro);
 	Optional<ParametrosEntity> findById(Long id);
+
+	Page<ParametrosEntity> findByParametroContainingAndEstado(String parametro, Integer estado, Pageable pageable);
+
 }

@@ -1,6 +1,5 @@
 package com.aliatic.core.trm.persistence.entities;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import jakarta.persistence.*;
